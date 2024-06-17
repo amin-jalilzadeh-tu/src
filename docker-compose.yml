@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DB_NAME: "DATALES_20240512"
+      DB_USER: "postgres"
+      DB_PASSWORD: "865990289"
+      DB_HOST: "db"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: "DATALES_20240512"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "865990289"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d  # Mount initialization scripts
+
+volumes:
+  postgres_data:
