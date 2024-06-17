@@ -31,24 +31,12 @@ def get_idf_config():
     }
 
 
-# Export the table
+# relevant tables   pg_dump
 
-# pg_dump -h leda.geodan.nl -U postgres -d Dataless -t all_databases_columns > table.sql
-
-# pg_dump -h leda.geodan.nl -U postgres -d research -t nldata.gebouw > gebouw.sql
-
-# pg_dump -h leda.geodan.nl -U postgres -d maquette_nl -t bag_latest.adres_plus > adres_plus.sql
-
-# pg_dump -h leda.geodan.nl -U postgres -d research -t tomahawk.energypoint > energypoint.sql
-
-# pg_dump -h leda.geodan.nl -U postgres -d research -t tomahawk.adres > adres.sql
-
-# pg_dump -h leda.geodan.nl -U postgres -d maquette_nl -t dt_heerlen.cesium_buildings > cesium_buildings.sql
-
-
+#  -h leda.geodan.nl -U postgres -d Dataless -t all_databases_columns > table.sql
+#  -h leda.geodan.nl -U postgres -d research -t nldata.gebouw > gebouw.sql
+#  -h leda.geodan.nl -U postgres -d maquette_nl -t bag_latest.adres_plus > adres_plus.sql
+#  -h leda.geodan.nl -U postgres -d research -t tomahawk.energypoint > energypoint.sql
+#  -h leda.geodan.nl -U postgres -d research -t tomahawk.adres > adres.sql
+#  -h leda.geodan.nl -U postgres -d maquette_nl -t dt_heerlen.cesium_buildings > cesium_buildings.sql
 # maquette_nl cesium.bag3d_v20231008
-
-
-
-# Import the table
-# psql -h hostname -U username -d targetdatabase -f table.sql
