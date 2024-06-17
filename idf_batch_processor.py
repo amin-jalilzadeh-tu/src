@@ -6,6 +6,7 @@ import numpy as np
 import shutil
 import subprocess
 from config import get_conn_params, get_idf_config
+from concurrent.futures import ThreadPoolExecutor
 
 # Use centralized configurations
 config = get_idf_config()
@@ -1587,9 +1588,10 @@ def update_idf_and_save(buildings_df, output_dir=config['output_dir']):
     base_idf_path = config['idf_file_path']
     idd_path = config['iddfile']
     # Iterate over each row in the DataFrame
-    for index, row in buildings_df.iterrows():
-        # Load the IDF object for this building
+    # Define a function to process each building
+    def process_building(row):
         idf = IDF(base_idf_path)
+
         
         # Apply modifications using the refactored functions
         remove_building_object(idf)
@@ -1618,6 +1620,17 @@ def update_idf_and_save(buildings_df, output_dir=config['output_dir']):
         idf.save(modified_idf_path)
         
         print(f"Saved modified IDF for building {row['ogc_fid']}.")
+
+
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        # Submit all jobs to the executor
+        executor.map(process_building, buildings_df.to_dict('records'))
+    
+
+
+
+
+
 
 
 # Call the function with the DataFrame, output directory, and the path to the IDD file

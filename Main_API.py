@@ -54,7 +54,14 @@ def run_analysis():
         print(f"Updated IDF and saved.")
         simulate_all()  # This could also generate additional data if necessary
         print(f"Simulation completed.")
-        process_output_files (output_dir, pc6_input)
+        
+        json_files = process_output_files (output_dir, pc6_input)
+        if not json_files:
+            return jsonify({"error": "No JSON files generated"}), 500
+        print(f"Processed output files: {json_files}")
+
+        return send_file(json_files[0], as_attachment=True, attachment_filename=os.path.basename(json_files[0]))
+
         #filename = generate_excel(pc6_input)
         #print(f"Sending file: {filename}")
         #return send_file(filename, as_attachment=True, download_name=f'{pc6_input}_results.xlsx')
@@ -62,38 +69,10 @@ def run_analysis():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-def generate_excel(district):
-    data = {'District': [district], 'Date': [datetime.now().strftime("%Y-%m-%d")], 'Note': ['Processed data']}
-    df = pd.DataFrame(data)
-    filename = f'tmp/{district}_results.xlsx'
-    if not os.path.exists('tmp'):
-        os.makedirs('tmp')
 
-    df.to_excel(filename, index=False, engine='openpyxl')
-    return filename
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-# For test
-#if __name__ == "__main__":
-    # Assuming get_conn_params and get_idf_config are correctly defined in config.py
- #   from config import get_conn_params, get_idf_config
- #   conn_params = get_conn_params()
- #   output_dir = get_idf_config()['output_dir']
- #   table_name = "test_pc6"
-
-    # Fetch building data
- #   buildings_df = fetch_buildings_data(table_name, conn_params)
- #   if not buildings_df.empty:
- #       print("Successfully fetched building data:")
- #       print(buildings_df.head())  # Display the first few rows of the DataFrame
-
-    # Run update_idf_and_save
- #   update_idf_and_save(buildings_df, output_dir)
- #   print(f"Check the output directory for modified IDF files: {output_dir}")
 
 
 

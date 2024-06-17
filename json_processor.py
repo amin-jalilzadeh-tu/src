@@ -2,12 +2,17 @@ import os
 import pandas as pd
 import json
 import re
+from datetime import datetime
 
-def process_output_files(output_dir, ):
-    # Make sure the output output_dir exists, if not, create it
+def process_output_files(output_dir, pc6):
+    # Ensure the output directory exists, if not, create it
     #if not os.path.exists(output_dir):
     #    os.makedirs(output_dir)
     
+    # Today's date in YYYY-MM-DD format
+    today = datetime.now().strftime("%Y-%m-%d")
+    print(f"Ensured output directory exists: {output_dir}")
+
     # Create dictionaries to hold all the data for each energy type
     natural_gas_data = {'timeIntervals': [], 'buildings': []}
     electricity_data = {'timeIntervals': [], 'buildings': []}
@@ -16,9 +21,10 @@ def process_output_files(output_dir, ):
     # Define a regex to extract the BAG ID from filenames
     bag_id_pattern = re.compile(r"modified_building_NL.IMBAG.Pand.(\d+)Meter.csv")
 
-    # Iterate through all files in the output_dir
+    # Iterate through all files in the directory
     for filename in os.listdir(output_dir):
         if filename.startswith('modified_building') and filename.endswith('Meter.csv'):
+            print(f"Processing file: {filename}")
             bag_id_match = bag_id_pattern.search(filename)
             if not bag_id_match:
                 continue
@@ -51,16 +57,27 @@ def process_output_files(output_dir, ):
             electricity_data['buildings'].append({'bagId': bag_id, 'data': df['Electricity Consumption (J)'].tolist()})
             total_energy_data['buildings'].append({'bagId': bag_id, 'data': df['Total Energy (J)'].tolist()})
 
-    # Save the data to JSON files
-    with open(os.path.join(output_dir, 'natural_gas_consumption.json'), 'w') as f:
-        json.dump(natural_gas_data, f, indent=4)
-    with open(os.path.join(output_dir, 'electricity_consumption.json'), 'w') as f:
-        json.dump(electricity_data, f, indent=4)
-    with open(os.path.join(output_dir, 'total_energy.json'), 'w') as f:
-        json.dump(total_energy_data, f, indent=4)
 
-# Define the output_dir to read files from and where to save the JSON files
-#   output_dir = 'D:/Try21'
-#   output_dir = 'D:/Output'  # Change this to your desired output output_dir
+    file_paths = []
+    for energy_type, content in [('natural_gas', natural_gas_data), ('electricity', electricity_data), ('total_energy', total_energy_data)]:
+        file_path = os.path.join(output_dir, f"{pc6}_{energy_type}_{today}.json")
+        print(f"Writing to file: {file_path}")
+        with open(file_path, 'w') as f:
+            json.dump(content, f, indent=4)
+        file_paths.append(file_path)
 
-#    process_output_files(output_dir, output_dir)
+    return file_paths
+
+
+    # Save the data to JSON files with the pc6 and date in the filename
+  #  with open(os.path.join(output_dir, f'{pc6}_natural_gas_{today}.json'), 'w') as f:
+  #      json.dump(natural_gas_data, f, indent=4)
+  #  with open(os.path.join(output_dir, f'{pc6}_electricity_{today}.json'), 'w') as f:
+  #      json.dump(electricity_data, f, indent=4)
+  #  with open(os.path.join(output_dir, f'{pc6}_total_energy_{today}.json'), 'w') as f:
+  #      json.dump(total_energy_data, f, indent=4)
+
+
+#output_dir="D:\Try21"
+#pc6 = "2628zl"
+#process_output_files(output_dir, pc6)
