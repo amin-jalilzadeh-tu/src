@@ -22,15 +22,21 @@ def get_conn_params():
 
 #  for SQLALchemy
 
-def get_idf_config():
-    return {
-        "iddfile": os.getenv('IDDFILE', r"D:\EnergyPlus\Energy+.idd"),
-        "idf_file_path": os.getenv('IDFFILE', r"C:\Users\aminj\OneDrive\Desktop\EnergyPlus\Minimal.idf"),
-        "epwfile": os.getenv('EPWFILE'),  # Assuming EPWFILE is set correctly in the environment
-        "output_dir": os.getenv('OUTPUT_DIR', r"D:\Try21")
+#def get_idf_config():
+#    return {
+#        "iddfile": os.getenv('IDDFILE', r"D:\EnergyPlus\Energy+.idd"),
+#        "idf_file_path": os.getenv('IDFFILE', r"C:\Users\aminj\OneDrive\Desktop\EnergyPlus\Minimal.idf"),
+#       "epwfile": os.getenv('EPWFILE'),  # Assuming EPWFILE is set correctly in the environment
+#        "output_dir": os.getenv('OUTPUT_DIR', r"D:\Try21")
     }
 
-
+def get_idf_config():
+    return {
+        "iddfile": os.getenv('IDDFILE', "/usr/local/EnergyPlus-22-2-0/Energy+.idd"),
+        "idf_file_path": os.getenv('IDFFILE', "/usr/local/EnergyPlus-22-2-0/Minimal.idf"),
+        "epwfile": os.getenv('EPWFILE', "/data/epwfile.epw"), 
+        "output_dir": os.getenv('OUTPUT_DIR', "/data/output")
+    }
 # relevant tables   pg_dump
 
 #  -h leda.geodan.nl -U postgres -d Dataless -t all_databases_columns > table.sql

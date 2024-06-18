@@ -37,9 +37,9 @@ ENV PATH="/usr/local/EnergyPlus-${ENERGYPLUS_INSTALL_VERSION}/:$PATH" \
     DB_USER="postgres" \
     DB_PASSWORD="mypassword" \
     DB_HOST="database_host" \
-    IDFFILE="/path/to/EnergyPlus/Minimal.idf" \
-    EPWFILE="/path/to/epwfile" \
-    OUTPUT_DIR="/path/to/output"
+    IDFFILE="/usr/local/EnergyPlus-${ENERGYPLUS_INSTALL_VERSION}/Minimal.idf" \
+    EPWFILE="/data/epwfile.epw" \
+    OUTPUT_DIR="/data/output"
 
 # Copy the rest of the application
 COPY . .
