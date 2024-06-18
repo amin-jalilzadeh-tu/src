@@ -1,6 +1,78 @@
+# Python-related files
 __pycache__/
-*.pyc
-.DS_Store
+*.py[cod]
+*$py.class
+*.pyo
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+develop-eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Testing
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+
+# Environments
 .env
+.venv
+env/
 venv/
-*.tar.gz
+ENV/
+env.bak/
+venv.bak/
+
+# Docker related
+## Ignore Docker volume directories if used
+data/
+postgres_data/
+## Docker build files
+*.tar
+*.gz
+## Docker Compose local override which might contain sensitive adjustments
+docker-compose.override.yml
+
+# Database files
+*.db
+*.sql
+*.sqlite
+
+# Logs and databases
+logs/
+*.log
+
+# Operating System generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# If using version control submodules
+.gitmodules

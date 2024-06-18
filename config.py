@@ -28,7 +28,7 @@ def get_conn_params():
 #        "idf_file_path": os.getenv('IDFFILE', r"C:\Users\aminj\OneDrive\Desktop\EnergyPlus\Minimal.idf"),
 #       "epwfile": os.getenv('EPWFILE'),  # Assuming EPWFILE is set correctly in the environment
 #        "output_dir": os.getenv('OUTPUT_DIR', r"D:\Try21")
-    }
+#    }
 
 def get_idf_config():
     return {
