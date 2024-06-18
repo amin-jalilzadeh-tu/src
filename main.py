@@ -15,10 +15,32 @@ from runner_generator import simulate_all
 from json_processor import process_output_files
 
 
+####-------------------------------------------------------------
+# this function is just to check the availability of the idd and minimal files in the dockerised energy plus
+energyplus_dir = "/usr/local/EnergyPlus-22.2.0-c249759bad-Linux-Ubuntu20.04-x86_64"
+examples_dir = os.path.join(energyplus_dir, "ExampleFiles")
+files_to_check = {
+    "minimal.idf in ExampleFiles": os.path.join(examples_dir, "minimal.idf"),
+    "Energy+.idd in EnergyPlus directory": os.path.join(energyplus_dir, "Energy+.idd")
+}
+def check_file_exists(file_description, path):
+    """ Check if a file exists at the given path """
+    if os.path.isfile(path):
+        print(f"Success: {file_description} - {path} exists.")
+    else:
+        print(f"Error: {file_description} - {path} does not exist.")
+# Check each file
+for description, path in files_to_check.items():
+    check_file_exists(description, path)
+####-------------------------------------------------------------
+
+
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/run_analysis', methods=['GET'])
+
+
 def run_analysis():
     pc6_input = request.args.get('pc6')
     print(f"Received pc6 input: {pc6_input}")  
@@ -71,7 +93,48 @@ def run_analysis():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
+
+
+### This is for checking the availability of the idd and minimal files in dockerised energy plus
+
+# Correct the path according to the actual installation directory
+energyplus_dir = "/usr/local/EnergyPlus-22.2.0-c249759bad-Linux-Ubuntu20.04-x86_64"
+
+# Path to the ExampleFiles directory
+examples_dir = os.path.join(energyplus_dir, "ExampleFiles")
+
+# File to check for
+file_to_check = "minimal.idf"
+
+# Full path to the file
+full_file_path = os.path.join(examples_dir, file_to_check)
+
+def check_file_exists(path):
+    """ Check if a file exists at the given path """
+    if os.path.isfile(path):
+        print(f"Success: {path} exists.")
+    else:
+        print(f"Error: {path} does not exist.")
+
+# Check if the minimal.idf file exists
+check_file_exists(full_file_path)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

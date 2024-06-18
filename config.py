@@ -3,23 +3,25 @@
 import json
 import os
 
-### For SQLALchemy
-from urllib.parse import quote
-
 def get_db_config():
     return {
         "dbname": os.getenv('DB_NAME', "Dataless"),
         "user": os.getenv('DB_USER', "postgres"),
         "password": os.getenv('DB_PASSWORD', "mypassword"),
-        "host": os.getenv('DB_HOST', "leda.geodan.nl") #leda.geodan.nl 5432 localhost
-        
+        "host": os.getenv('DB_HOST', "leda.geodan.nl")
     }
 
 def get_conn_params():
     config = get_db_config()
     return f"dbname='{config['dbname']}' user='{config['user']}' password='{config['password']}' host='{config['host']}'"
 
-
+def get_idf_config():
+    return {
+        "iddfile": os.getenv('IDDFILE'),
+        "idf_file_path": os.getenv('IDFFILE'),
+        "epwfile": os.getenv('EPWFILE'),
+        "output_dir": os.getenv('OUTPUT_DIR')
+    }
 #  for SQLALchemy
 
 #def get_idf_config():
@@ -30,13 +32,7 @@ def get_conn_params():
 #        "output_dir": os.getenv('OUTPUT_DIR', r"D:\Try21")
 #    }
 
-def get_idf_config():
-    return {
-        "iddfile": os.getenv('IDDFILE', "/usr/local/EnergyPlus-22-2-0/Energy+.idd"),
-        "idf_file_path": os.getenv('IDFFILE', "/usr/local/EnergyPlus-22-2-0/Minimal.idf"),
-        "epwfile": os.getenv('EPWFILE', "/data/epwfile.epw"), 
-        "output_dir": os.getenv('OUTPUT_DIR', "/data/output")
-    }
+
 # relevant tables   pg_dump
 
 #  -h leda.geodan.nl -U postgres -d Dataless -t all_databases_columns > table.sql

@@ -1,20 +1,23 @@
 version: '3.8'
 services:
   app:
+    env_file:
+      - .env
     build: .
     ports:
-      - "8000:8000"
-    volumes:
-      - ./data:/data  # Local directory for EPW files and outputs
+      - "8000:5000"
     environment:
-      IDDFILE: ${IDDFILE}
-      IDFFILE: ${IDFFILE}
-      EPWFILE: ${EPWFILE}
-      OUTPUT_DIR: ${OUTPUT_DIR}
+      IDDFILE: "/usr/local/EnergyPlus-22.2.0-c249759bad-Linux-Ubuntu20.04-x86_64/Energy+.idd"
+      IDFFILE: "/usr/local/EnergyPlus-22.2.0-c249759bad-Linux-Ubuntu20.04-x86_64/ExampleFiles/Minimal.idf"
+      EPWFILE: ${EPWFILE}  # Path set by user in .env or passed directly as an environment variable
+      OUTPUT_DIR: ${OUTPUT_DIR}  # Path set by user in .env or passed directly as an environment variable
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: ${DB_HOST}
+      ENERGYPLUS_VERSION: 22.2.0
+      ENERGYPLUS_INSTALLATION_DIR: ${ENERGYPLUS_INSTALLATION_DIR}
+
     depends_on:
       - db
   db:
@@ -27,6 +30,5 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d
-
 volumes:
   postgres_data:

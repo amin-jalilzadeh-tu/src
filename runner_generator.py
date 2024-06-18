@@ -5,7 +5,6 @@ from multiprocessing import Pool
 from config import get_idf_config  # Import configuration function
 import logging
 
-
 def modify_idf_for_detailed_output(idf):
     """ Adds detailed output variables to the IDF file. """
     variables = [
@@ -34,11 +33,18 @@ def make_eplaunch_options(idf, fname):
 
 def run_simulation(args):
     idf_path, epwfile, iddfile = args
+    ###
+    energyplus_exe_path = os.getenv('ENERGYPLUS_EXE_PATH', '/usr/local/EnergyPlus-22-2-0/energyplus')
+    ###
     try:
         IDF.setiddname(iddfile)
         idf = IDF(idf_path, epwfile)
         modify_idf_for_detailed_output(idf)
         options = make_eplaunch_options(idf, idf_path)
+        ####
+        # Include the path to the EnergyPlus executable
+        options.update({'energyplus': energyplus_exe_path})
+        ####
         idf.run(**options)
         logging.info(f"Simulation completed for {idf_path}")
     except Exception as e:
