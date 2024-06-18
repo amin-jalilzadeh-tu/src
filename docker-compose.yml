@@ -4,13 +4,18 @@ services:
     env_file:
       - .env
     build: .
+    volumes:
+      - ./data:/app/data  
+      - ./output:/app/output
+      - ./data/weather:/app/data/weather
+
     ports:
       - "8000:5000"
     environment:
       IDDFILE: "/usr/local/EnergyPlus-22.2.0-c249759bad-Linux-Ubuntu20.04-x86_64/Energy+.idd"
       IDFFILE: "/usr/local/EnergyPlus-22.2.0-c249759bad-Linux-Ubuntu20.04-x86_64/ExampleFiles/Minimal.idf"
-      EPWFILE: ${EPWFILE}  # Path set by user in .env or passed directly as an environment variable
-      OUTPUT_DIR: ${OUTPUT_DIR}  # Path set by user in .env or passed directly as an environment variable
+      EPWFILE: "/app/data/weather/NLD_Amsterdam.062400_IWEC.epw"  
+      OUTPUT_DIR: ${OUTPUT_DIR}  
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
