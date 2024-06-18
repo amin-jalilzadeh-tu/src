@@ -7,23 +7,23 @@ services:
     volumes:
       - ./data:/data  # Local directory for EPW files and outputs
     environment:
-      - IDDFILE=${IDDFILE}
-      - IDFFILE=${IDFFILE}
-      - EPWFILE=${EPWFILE}
-      - OUTPUT_DIR=${OUTPUT_DIR}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_HOST=${DB_HOST}
+      IDDFILE: ${IDDFILE}
+      IDFFILE: ${IDFFILE}
+      EPWFILE: ${EPWFILE}
+      OUTPUT_DIR: ${OUTPUT_DIR}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
     depends_on:
       - db
   db:
     image: postgres:13
     restart: always
     environment:
-      POSTGRES_DB=${DB_NAME}
-      POSTGRES_USER=${DB_USER}
-      POSTGRES_PASSWORD=${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d

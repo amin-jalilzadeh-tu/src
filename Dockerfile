@@ -30,16 +30,16 @@ RUN wget "https://github.com/NREL/EnergyPlus/releases/download/v${ENERGYPLUS_VER
     tar -xzvf "EnergyPlus-${ENERGYPLUS_VERSION}-${ENERGYPLUS_SHA}-Linux-Ubuntu20.04-x86_64.tar.gz" -C /usr/local/ && \
     rm "EnergyPlus-${ENERGYPLUS_VERSION}-${ENERGYPLUS_SHA}-Linux-Ubuntu20.04-x86_64.tar.gz"
 
-# Set environment variables
+# Set environment variables from the .env file
 ENV PATH="/usr/local/EnergyPlus-${ENERGYPLUS_INSTALL_VERSION}/:$PATH" \
-    IDDFILE="/usr/local/EnergyPlus-${ENERGYPLUS_INSTALL_VERSION}/Energy+.idd" \
-    DB_NAME="Dataless" \
-    DB_USER="postgres" \
-    DB_PASSWORD="mypassword" \
-    DB_HOST="database_host" \
-    IDFFILE="/usr/local/EnergyPlus-${ENERGYPLUS_INSTALL_VERSION}/Minimal.idf" \
-    EPWFILE="/data/epwfile.epw" \
-    OUTPUT_DIR="/data/output"
+    IDDFILE="${IDDFILE}" \
+    IDFFILE="${IDFFILE}" \
+    EPWFILE="${EPWFILE}" \
+    OUTPUT_DIR="${OUTPUT_DIR}" \
+    DB_NAME="${DB_NAME}" \
+    DB_USER="${DB_USER}" \
+    DB_PASSWORD="${DB_PASSWORD}" \
+    DB_HOST="${DB_HOST}"
 
 # Copy the rest of the application
 COPY . .
