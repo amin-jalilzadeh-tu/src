@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     gcc \
     wget \
     unzip \
+    tk \
+    tcl \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy just the requirements.txt first to leverage Docker cache
@@ -31,9 +33,9 @@ RUN wget "https://github.com/NREL/EnergyPlus/releases/download/v${ENERGYPLUS_VER
 # Set environment variables
 ENV PATH="/usr/local/EnergyPlus-${ENERGYPLUS_INSTALL_VERSION}/:$PATH" \
     IDDFILE="/usr/local/EnergyPlus-${ENERGYPLUS_INSTALL_VERSION}/Energy+.idd" \
-    DB_NAME="DATALES_20240512" \
+    DB_NAME="Dataless" \
     DB_USER="postgres" \
-    DB_PASSWORD="865990289" \
+    DB_PASSWORD="mypassword" \
     DB_HOST="database_host" \
     IDFFILE="/path/to/EnergyPlus/Minimal.idf" \
     EPWFILE="/path/to/epwfile" \

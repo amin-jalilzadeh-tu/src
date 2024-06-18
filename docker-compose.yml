@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 
 services:
   app:
@@ -6,10 +6,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DB_NAME: "DATALES_20240512"
+      DB_NAME: "Dataless"
       DB_USER: "postgres"
-      DB_PASSWORD: "865990289"
-      DB_HOST: "db"
+      DB_PASSWORD: "mypassword"
+      DB_HOST: "leda.geodan.nl"
     depends_on:
       - db
 
@@ -17,9 +17,9 @@ services:
     image: postgres:13
     restart: always
     environment:
-      POSTGRES_DB: "DATALES_20240512"
+      POSTGRES_DB: "Dataless"
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "865990289"
+      POSTGRES_PASSWORD: "mypassword"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./init-scripts:/docker-entrypoint-initdb.d  # Mount initialization scripts

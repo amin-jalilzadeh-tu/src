@@ -1,9 +1,8 @@
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import os
-import pandas as pd
+
 from datetime import datetime, timedelta
-import random
 
 from database_utils import validate_pc6, fetch_raw_data_for_pc6, create_or_replace_table
 from f1_final_energy_label import assign_final_energy_labels
@@ -74,5 +73,8 @@ def run_analysis():
 if __name__ == '__main__':
     app.run(debug=True)
 
+
+
+# curl "http://127.0.0.1:5000/run_analysis?pc6=2628zl"
 
 

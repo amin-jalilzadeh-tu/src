@@ -1,4 +1,4 @@
-# config.py
+# config2.py
 
 import json
 import os

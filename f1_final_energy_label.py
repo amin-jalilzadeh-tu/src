@@ -2,7 +2,6 @@
 
 from collections import Counter
 import pandas as pd
-import numpy as np
 import psycopg2
 from config import get_conn_params
 
