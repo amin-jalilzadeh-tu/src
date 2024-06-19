@@ -8,7 +8,7 @@ This project is designed to run energy simulations using EnergyPlus and PostgreS
 
 1. **Clone the repository**:
    ```sh
-   git clone https://github.com/yourusername/Eplus_202405.git
+   git clone https://github.com/amin-jalilzadeh-tu/src.git
    cd Eplus_202405/src
 
 2. **Build and Run the Docker Containers:
