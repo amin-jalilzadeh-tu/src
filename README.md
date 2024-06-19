@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is designed to run energy simulations using EnergyPlus and PostgreSQL, fully containerized via Docker. The necessary data is included in the `data` folder, and configurations can be adjusted via the `.env` file if needed.
+This project is designed to run energy simulations using EnergyPlus and PostgreSQL,  containerized via Docker and prepare to implement in linux server of geodan. The necessary data is included in the `data` folder, and configurations can be adjusted via the `.env` file if needed.
 
 ## Setup Instructions
 
