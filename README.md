@@ -18,9 +18,9 @@ This project is designed to run energy simulations using EnergyPlus and PostgreS
    docker-compose build
    docker-compose up
 
-## Running the Simulation
-The API is set to run with the hardcoded test data :
-   '''sh
+2. **Running the Simulation
+   The API is set to run with the hardcoded test data :
+   ```sh
    curl "http://localhost:8000/run_analysis?pc6=somevalue"
 
 
