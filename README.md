@@ -11,20 +11,25 @@ This project is designed to run energy simulations using EnergyPlus and PostgreS
    git clone https://github.com/yourusername/Eplus_202405.git
    cd Eplus_202405/src
 
-1. **Build and Run the Docker Containers:
+2. **Build and Run the Docker Containers:
    ```sh
    Copy code
    docker-compose down
    docker-compose build
    docker-compose up
 
-## Data
-The project connects to a PostgreSQL database set up in pgAdmin (database name: Dataless).
-The necessary data files are located in the data folder.
-Configuration details (currently no need for changes) are stored in the .env file.
-
 ## Running the Simulation
 The API is set to run with the hardcoded test data :
+   '''sh
+   curl "http://localhost:8000/run_analysis?pc6=somevalue"
+
+
+## Data
+The project connects to a PostgreSQL database set up in pgAdmin (database name: Dataless).
+Other necessary data files are located in the data folder.
+Configuration details (currently no need for changes) are stored in the .env file.
+
+
 
 
 ## Start the simulation:
