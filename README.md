@@ -11,12 +11,12 @@ This project is designed to run energy simulations using EnergyPlus and PostgreS
    git clone https://github.com/yourusername/Eplus_202405.git
    cd Eplus_202405/src
 
-Build and Run the Docker Containers:
-```sh
-Copy code
-docker-compose down
-docker-compose build
-docker-compose up
+1. **Build and Run the Docker Containers:
+   ```sh
+   Copy code
+   docker-compose down
+   docker-compose build
+   docker-compose up
 
 ## Data
 The project connects to a PostgreSQL database set up in pgAdmin (database name: Dataless).
