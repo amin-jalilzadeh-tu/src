@@ -38,7 +38,7 @@ nosetests.xml
 coverage.xml
 
 # Environments
-.env
+#.env
 .venv
 env/
 venv/
@@ -48,7 +48,6 @@ venv.bak/
 
 # Docker related
 ## Ignore Docker volume directories if used
-data/
 postgres_data/
 ## Docker build files
 *.tar

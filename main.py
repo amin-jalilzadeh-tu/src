@@ -97,30 +97,6 @@ if __name__ == '__main__':
 
 
 
-### This is for checking the availability of the idd and minimal files in dockerised energy plus
-
-# Correct the path according to the actual installation directory
-energyplus_dir = "/usr/local/EnergyPlus-22.2.0-c249759bad-Linux-Ubuntu20.04-x86_64"
-
-# Path to the ExampleFiles directory
-examples_dir = os.path.join(energyplus_dir, "ExampleFiles")
-
-# File to check for
-file_to_check = "minimal.idf"
-
-# Full path to the file
-full_file_path = os.path.join(examples_dir, file_to_check)
-
-def check_file_exists(path):
-    """ Check if a file exists at the given path """
-    if os.path.isfile(path):
-        print(f"Success: {path} exists.")
-    else:
-        print(f"Error: {path} does not exist.")
-
-# Check if the minimal.idf file exists
-check_file_exists(full_file_path)
-
 
 
 
